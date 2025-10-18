@@ -1,8 +1,14 @@
 
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = 'https://rvxmjqeqfurufbnsluft.supabase.co'
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ2eG1qcWVxZnVydWZibnNsdWZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA2ODM5NTIsImV4cCI6MjA3NjI1OTk1Mn0.SNtoJwNryKnWPjwBKr5TJkkqR6ztLmntzy4k5sNks4k'
+// Get Supabase credentials from environment variables
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://rvxmjqeqfurufbnsluft.supabase.co'
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ2eG1qcWVxZnVydWZibnNsdWZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA2ODM5NTIsImV4cCI6MjA3NjI1OTk1Mn0.SNtoJwNryKnWPjwBKr5TJkkqR6ztLmntzy4k5sNks4k'
+
+// Validate environment variables
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.error('Missing Supabase environment variables. Please check your .env.local file.')
+}
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
